@@ -2,3 +2,7 @@
 .python-version
 sample/
 __pycache__/
+
+dataset/ptb.train.npy
+dataset/ptb.train.txt
+dataset/ptb.vocab.pkl
