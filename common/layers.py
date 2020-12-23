@@ -46,21 +46,6 @@ class Affine:
         return dx
 
 
-class Sigmoid:
-    def __init__(self):
-        self.params, self.grads = [], []
-        self.out = None
-
-    def forward(self, x):
-        out = 1 / (1 + np.exp(-x))
-        self.out = out
-        return out
-
-    def backward(self, dout):
-        dx = dout * (1.0 - self.out) * self.out
-        return dx
-
-
 class SoftmaxWithLoss:
     def __init__(self):
         self.params, self.grads = [], []
@@ -87,3 +72,38 @@ class SoftmaxWithLoss:
         dx = dx / batch_size
 
         return dx
+
+
+class Sigmoid:
+    def __init__(self):
+        self.params, self.grads = [], []
+        self.out = None
+
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+        return out
+
+    def backward(self, dout):
+        dx = dout * (1.0 - self.out) * self.out
+        return dx
+
+
+class Embedding:
+    def __init__(self, W):
+        self.params = [W]
+        self.grads = [np.zeros_like(W)]
+        self.idx = None
+
+    def forward(self, idx):
+        W, = self.params
+        self.idx = idx
+        out = W[idx]
+        return out
+
+    def backward(self, dout):
+        dW, = self.grads
+        dW[...] = 0
+        for i, word_id in enumerate(self.idx):
+            dW[word_id] += dout[i]
+        return None
