@@ -8,7 +8,8 @@ T = 20  # 時系列データの長さ
 
 dh = np.ones((N, H))
 np.random.seed(3)
-Wh = np.random.randn(H, H)
+# Wh = np.random.randn(H, H)
+Wh = np.random.randn(H, H) * 0.5
 
 norm_list = []
 for t in range(T):
