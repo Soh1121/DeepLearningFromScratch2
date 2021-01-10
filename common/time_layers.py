@@ -229,6 +229,12 @@ class TimeLSTM:
         self.dh = dh
         return dxs
 
+    def set_state(self, h, c=None):
+        self.h, self.c = h, c
+
+    def reset_state(self):
+        self.h, self.c = None, None
+
 
 class TimeEmbedding:
     def __init__(self, W):

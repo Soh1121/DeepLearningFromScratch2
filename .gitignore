@@ -4,6 +4,4 @@ sample/
 __pycache__/
 *.pkl
 
-dataset/ptb.train.npy
-dataset/ptb.train.txt
-dataset/ptb.vocab.pkl
+dataset/
