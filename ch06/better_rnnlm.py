@@ -2,6 +2,7 @@ import sys
 sys.path.append('..')
 from common.np import *  # import numpy as np
 from common.time_layers import *
+from common.base_model import BaseModel
 
 
 class BetterRnnlm(BaseModel):
