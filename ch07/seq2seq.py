@@ -1,6 +1,7 @@
 import sys
 sys.path.append('..')
 from common.time_layers import *
+from common.base_model import BaseModel
 
 
 class Encoder:
@@ -93,6 +94,9 @@ class Seq2seq(BaseModel):
         self.encoder = Encoder(V, D, H)
         self.decoder = Decoder(V, D, H)
         self.softmax = TimeSoftmaxWithLoss()
+
+        self.params = self.encoder.params + self.decoder.params
+        self.grads = self.encoder.grads + self.decoder.grads
 
     def forward(self, xs, ts):
         decoder_xs, decoder_ts = ts[:, :-1], ts[:, 1:]
