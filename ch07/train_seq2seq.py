@@ -7,6 +7,7 @@ from common.trainer import Trainer
 from common.util import eval_seq2seq
 import matplotlib.pyplot as plt
 import numpy as np
+from peeky_seq2seq import PeekySeq2seq
 
 
 # データセットの読み込み
@@ -27,7 +28,10 @@ batch_size = 128
 max_epoch = 25
 max_grad = 5.0
 
-model = Seq2seq(vocab_size, wordvec_size, hidden_size)
+# Normal or Peeky? ==============================================
+#model = Seq2seq(vocab_size, wordvec_size, hidden_size)
+model = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
+# ================================================================
 optimizer = Adam()
 trainer = Trainer(model, optimizer)
 
