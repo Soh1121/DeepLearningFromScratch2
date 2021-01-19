@@ -2,6 +2,7 @@ import sys
 sys.path.append('..')
 from common.time_layers import *
 from ch07.seq2seq import Encoder, Seq2seq
+from ch08.attention_layer import TimeAttention
 
 
 class AttentionEncoder(Encoder):
@@ -85,3 +86,14 @@ class AttentionDecoder:
             sampled.append(sample_id)
 
         return sampled
+
+
+class AttentionSeq2seq(Seq2seq):
+    def __init__(self, vocab_size, wordvec_size, hidden_size):
+        args = vocab_size, wordvec_size, hidden_size
+        self.encoder = AttentionEncoder(*args)
+        self.decoder = AttentionDecoder(*args)
+        self.softmax = TimeSoftmaxWithLoss()
+
+        self.params = self.encoder.params + self.decoder.params
+        self.grads = self.encoder.grads + self.decoder.grads
